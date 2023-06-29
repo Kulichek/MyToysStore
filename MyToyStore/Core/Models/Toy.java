@@ -2,13 +2,13 @@ package MyToyStore.Core.Models;
 
 import java.util.UUID;
 
-public class Toy implements Comparable<Toy>{
-    
+public class Toy implements Comparable<Toy> {
+
     private final String name;
-    private double probability;
+    private int probability;
     private final UUID id;
 
-    public Toy(String name, double probability) {
+    public Toy(String name, int probability) {
         this.name = name;
         this.probability = probability;
         this.id = UUID.randomUUID();
@@ -18,7 +18,7 @@ public class Toy implements Comparable<Toy>{
         return name;
     }
 
-    public double getProbability() {
+    public int getProbability() {
         return probability;
     }
 
@@ -28,6 +28,7 @@ public class Toy implements Comparable<Toy>{
 
     public void setProbability(int newPrice) {
         this.probability = newPrice;
+
     }
 
     @Override
@@ -77,6 +78,6 @@ public class Toy implements Comparable<Toy>{
         return Double.compare(this.probability, other.getProbability());
 
     }
-     
+
     
 }
