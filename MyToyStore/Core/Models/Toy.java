@@ -1,17 +1,16 @@
 package MyToyStore.Core.Models;
 
-import java.util.UUID;
-
 public class Toy implements Comparable<Toy> {
 
     private final String name;
     private int probability;
-    private final UUID id;
+    private int id;
+    private static int nextId = 1;
 
     public Toy(String name, int probability) {
         this.name = name;
         this.probability = probability;
-        this.id = UUID.randomUUID();
+        this.id = nextId++;
     }
 
     public String getName() {
@@ -22,7 +21,7 @@ public class Toy implements Comparable<Toy> {
         return probability;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
@@ -37,14 +36,19 @@ public class Toy implements Comparable<Toy> {
     }
 
     @Override
+    public int compareTo(Toy other) {
+
+        return Double.compare(this.probability, other.getProbability());
+
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        long temp;
-        temp = Double.doubleToLongBits(probability);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + probability;
+        result = prime * result + id;
         return result;
     }
 
@@ -62,22 +66,11 @@ public class Toy implements Comparable<Toy> {
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (Double.doubleToLongBits(probability) != Double.doubleToLongBits(other.probability))
+        if (probability != other.probability)
             return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
+        if (id != other.id)
             return false;
         return true;
     }
 
-    @Override
-    public int compareTo(Toy other) {
-
-        return Double.compare(this.probability, other.getProbability());
-
-    }
-
-    
 }
