@@ -1,5 +1,8 @@
 package MyToyStore.Core.Models;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Toy implements Comparable<Toy> {
 
     private final String name;
@@ -25,14 +28,29 @@ public class Toy implements Comparable<Toy> {
         return id;
     }
 
-    public void setProbability(int newPrice) {
-        this.probability = newPrice;
+    public void setProbability(int probability) {
+        this.probability = probability;
 
     }
 
+    public String exportToFile() {
+        try {
+            FileWriter writer = new FileWriter("PrizeToys.txt", true);
+            writer.write(this.toString());
+            writer.write(System.lineSeparator());
+            writer.close();
+            return "Игрушка успешно экспортирована в файл.";
+        } catch(IOException e) {
+            return "Произошла ошибка при экспортировании игрушки в файл.";
+            // e.printStackTrace();
+        }
+    }
+
+    
+
     @Override
     public String toString() {
-        return "Игрушка [имя: " + name + ", id=" + id + "]";
+        return "игрушка [Название=" + name + ", Вероятность 0-100=" + probability + ", id=" + id + "]";
     }
 
     @Override
@@ -71,6 +89,8 @@ public class Toy implements Comparable<Toy> {
         if (id != other.id)
             return false;
         return true;
+        
     }
 
+    
 }
