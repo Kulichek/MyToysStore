@@ -1,11 +1,22 @@
 package MyToyStore.Core.MVP;
 
+import MyToyStore.Core.Infrastructure.PrizeToys;
 import MyToyStore.Core.Infrastructure.ToyBox;
 
 public class Model {
-    ToyBox currenToyBox;
+    private ToyBox currentToyBox;
+    private PrizeToys prizeBoxQueue;
 
     public Model() {
-        currenToyBox = new ToyBox();
+        currentToyBox = new ToyBox();
+        prizeBoxQueue = new PrizeToys();
+    }
+
+    public ToyBox getCurrentToyBox() {
+        return this.currentToyBox;
+    }
+
+    public PrizeToys getPrizeBoxQueue() {
+        return this.prizeBoxQueue;
     }
 }
